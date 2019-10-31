@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 const GameSchema = new Schema({
   title: { type: String, required: true, min: 2, max: 100 },
   publisher: { type: Schema.Types.ObjectId, ref: 'Publisher', required: true },
-  genre: { type: Schema.Types.ObjectId, ref: 'Genre', required: true },
+  genre: [{ type: Schema.Types.ObjectId, ref: 'Genre', required: true }],
   released: { type: Date, default: Date.now },
   stock: { type: Number, default: 1 },
   price: { type: Number, required: true }
