@@ -33,13 +33,15 @@ exports.game_detail = function(req, res, next) {
         return next(err)
       }
 
-      if (game_info === null) {
-        const err = new Error('Game not found')
-        err.status = 404
-        return next(err)
-      }
-
-      res.render('game_detail', { title: 'Game Detail', game_info: game_info })
+      // if (game_info === null) {
+      //   const err = new Error('Game not found')
+      //   err.status = 404
+      //   return next(err)
+      // }
+      res.render('game_detail', {
+        title: 'Game Detail',
+        game_info: game_info
+      })
     })
 }
 exports.game_list = function(req, res, next) {

@@ -8,7 +8,7 @@ const CartSchema = new Schema({
 
 // URL virtual
 CartSchema.virtual('url').get(function() {
-  return '/cart/' + this._id
+  return '/shop/cart/' + this._id
 })
 
 // Total price on cart

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1= title
+
+    p #[strong Title: ] #{game_info.title}
+    p #[strong Publisher: ]
+        a(href = game_info.publisher.url) #{game_info.publisher.name}
+    p #[strong Genres: ]
+        each genre in game_info.genre
+            a(href = genre.url) #{genre.name}
+            | 
+    p #[strong Released: ] #{game_info.date_formatted}
+    p #[strong Stock: ] #{game_info.stock}
+    p #[strong Price: ] #{game_info.price}

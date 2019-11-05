@@ -14,7 +14,7 @@ const GameSchema = new Schema({
 
 // URL virtual
 GameSchema.virtual('url').get(function() {
-  return '/game/' + this._id
+  return '/shop/game/' + this._id
 })
 
 // YYYY MM DD Date virtual

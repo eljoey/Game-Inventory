@@ -8,7 +8,7 @@ const PublisherSchema = new Schema({
 
 // URL virtual
 PublisherSchema.virtual('url').get(function() {
-  return '/publisher/' + this.id
+  return '/shop/publisher/' + this.id
 })
 
 // Export model

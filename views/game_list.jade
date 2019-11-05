@@ -15,8 +15,6 @@ block content
             each genre in game.genre
                 a(href=genre.url) #{genre.name}
                 | 
-        p #[strong Released: ] #{game.date_formatted}
-        p #[strong In-Stock: ] #{game.stock}
         p #[strong Price: ] #{game.price}
         br
 
