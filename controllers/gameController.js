@@ -2,12 +2,31 @@ const Game = require('../models/game')
 const Publisher = require('../models/publisher')
 const Genre = require('../models/genre')
 
-const aync = require('async')
+const async = require('async')
 const { body, validationResult } = require('express-validator/check')
 const { sanitizeBody } = require('express-validator/filter')
 
 exports.game_create_get = function(req, res, next) {
-  res.send('game create GET')
+  async.parallel(
+    {
+      publishers: callback => {
+        Publisher.find(callback)
+      },
+      genres: callback => {
+        Genre.find(callback)
+      }
+    },
+    (err, results) => {
+      if (err) {
+        return next(err)
+      }
+      res.render('game_form', {
+        title: 'Create Game',
+        publishers: results.publishers,
+        genres: results.genres
+      })
+    }
+  )
 }
 exports.game_create_post = function(req, res, next) {
   res.send('game create POST')
