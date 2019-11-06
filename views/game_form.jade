@@ -28,6 +28,15 @@ block content
                     div(style='display: inline; padding-right:10px;')
                         input.checkbox-input(type='checkbox', name='genre', id=genre._id, checked=genre.checked )
                         label(for=genre._id) #{genre.name}
+        div.form-group
+            label(for='released') Released:
+            input#release_date.form-control(type='date' name='released' placehoder='mm/dd/yyyy' value=(undefined === game ? '' : game.date_formatted))
+        div.form-group
+            label(for='stock') Stock:
+            input#stock.form-control(type='number' placeholder='Number of stock' name='stock' value=(undefined === game ? '' : game.stock))
+        div.form-group
+            label(for='price') Price:
+            input#price.form-control(type='number' placeholder='Price' name='price' value=(undefined === game ? '' : game.price))
         button.btn.btn-primary(type='submit') Submit
 
     if errors
