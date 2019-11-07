@@ -11,22 +11,22 @@ block content
             label(for='publisher') Publisher:
             select#publisher.form-control(type='select' placeholder='Select Publisher' name='publisher' required='true')
                 for publisher in publishers
-                    if book
+                    if game
                         option(
                             value=publisher._id
                             selected=(
-                                publisher._id.toString() === game.publisher._id
-                                || publisher._id.toString() === game.publisher
+                                publisher._id.toString() == game.publisher._id
+                                || publisher._id.toString() == game.publisher
                             ) ? 'selected' : false
                         ) #{publisher.name}
                     else
                         option(value=publisher._id) #{publisher.name}
         div.form-group
-            label(for='genre') Genre:
+            label Genre:
             div
                 for genre in genres
                     div(style='display: inline; padding-right:10px;')
-                        input.checkbox-input(type='checkbox', name='genre', id=genre._id, checked=genre.checked )
+                        input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id checked=genre.checked )
                         label(for=genre._id) #{genre.name}
         div.form-group
             label(for='released') Released:
