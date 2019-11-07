@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1= title
+
+    p #[strong Title: ] #{game.title}
+    p #[strong Publisher: ] 
+        a(href=game.publisher.url) #{game.publisher.name}
+    p #[strong Genre: ]&nbsp;
+        each val, index in game.genre
+            a(href=val.url) #{val.name}
+            if index < game.genre.length - 1
+             |, 
+    p #[strong Stock: ] #{game.stock}
+    p #[strong Price: ] $#{game.price}

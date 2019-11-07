@@ -7,9 +7,14 @@ block content
     p #[strong Publisher: ]
         a(href = game_info.publisher.url) #{game_info.publisher.name}
     p #[strong Genres: ]
-        each genre in game_info.genre
+        each genre, index in game_info.genre
             a(href = genre.url) #{genre.name}
-            | 
+            if index < game_info.genre.length - 1
+                |, 
     p #[strong Released: ] #{game_info.date_formatted}
     p #[strong Stock: ] #{game_info.stock}
     p #[strong Price: ] #{game_info.price}
+
+    hr
+    p
+        a(href=game_info.url+'/delete') Delete Game

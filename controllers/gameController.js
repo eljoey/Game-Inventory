@@ -124,7 +124,19 @@ exports.game_create_post = [
 ]
 
 exports.game_delete_get = function(req, res, next) {
-  res.send('game delete GET')
+  Game.findById(req.params.id)
+    .populate('publisher')
+    .populate('genre')
+    .exec((err, gamefound) => {
+      if (err) {
+        return next(err)
+      }
+
+      res.render('game_delete', {
+        title: 'Delete Game',
+        game: gamefound
+      })
+    })
 }
 exports.game_delete_post = function(req, res, next) {
   res.send('game delete POST')
