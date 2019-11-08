@@ -48,7 +48,7 @@ exports.game_create_post = [
     .trim()
     .isNumeric()
     .withMessage('Stock has non-numeric characters'),
-  body('price', 'Price ')
+  body('price', 'Price must not be empty')
     .trim()
     .isNumeric()
     .withMessage('Price has non-numeric characters'),
@@ -201,9 +201,102 @@ exports.game_update_get = function(req, res, next) {
     }
   )
 }
-exports.game_update_post = function(req, res, next) {
-  res.send('game update POST')
-}
+exports.game_update_post = [
+  // Convert genre to array
+  (req, res, next) => {
+    if (!(req.body.genre instanceof Array)) {
+      if (typeof req.body.genre === 'undefined') req.body.genre = []
+      else req.body.genre = new Array(req.body.genre)
+    }
+    next()
+  },
+
+  // Validate
+  body('title', 'Title must not be empty')
+    .trim()
+    .isLength({ min: 1 }),
+  body('publisher', 'Publisher must not be empty')
+    .trim()
+    .isLength({ min: 1 }),
+  body('released', 'Released date must not be empty').isISO8601(),
+  body('stock', 'Stock must not be empty')
+    .trim()
+    .isNumeric()
+    .withMessage('Stock has non-numeric characters'),
+  body('price', 'Price must not be empty')
+    .trim()
+    .isNumeric()
+    .withMessage('Price has non-numeric characters'),
+
+  // Sanitize
+
+  sanitizeBody('genre.*').escape(),
+  sanitizeBody('title').escape(),
+  sanitizeBody('publisher').escape(),
+  sanitizeBody('released').toDate(),
+  sanitizeBody('stock').escape(),
+  sanitizeBody('price').escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req)
+
+    let game = new Game({
+      title: req.body.title,
+      publisher: req.body.publisher,
+      genre: typeof req.body.genre === 'undefined' ? [] : req.body.genre,
+      released: req.body.released,
+      stock: req.body.stock,
+      price: req.body.price,
+      _id: req.params.id
+    })
+
+    if (!errors.isEmpty()) {
+      // Render form again with errors
+
+      async.parallel(
+        {
+          publishers: callback => {
+            Publisher.find(callback)
+          },
+          genres: callback => {
+            Genre.find(callback)
+          }
+        },
+        (err, results) => {
+          if (err) {
+            return next(err)
+          }
+
+          // Mark genres as checked
+          for (let i = 0; i < results.genres.length; i++) {
+            if (game.genre.indexOf(results.genres[i]._id) > -1) {
+              results.genres[i].checked = 'true'
+            }
+          }
+
+          res.render('game_form', {
+            title: 'Update Game',
+            game: game,
+            publishers: results.publishers,
+            genres: results.genres,
+            errors: errors.array()
+          })
+        }
+      )
+      return
+    } else {
+      // Valid data. Update
+      Game.findByIdAndUpdate(req.params.id, game, {}, function(err, thegame) {
+        if (err) {
+          return next(err)
+        }
+
+        res.redirect(thegame.url)
+      })
+    }
+  }
+]
+
 exports.game_detail = function(req, res, next) {
   Game.findById(req.params.id)
     .populate('genre')
