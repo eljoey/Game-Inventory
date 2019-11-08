@@ -139,7 +139,19 @@ exports.game_delete_get = function(req, res, next) {
     })
 }
 exports.game_delete_post = function(req, res, next) {
-  res.send('game delete POST')
+  Game.findById(req.body.gameid).exec((err, gameToDelete) => {
+    if (err) {
+      return next(err)
+    }
+
+    Game.findByIdAndRemove(req.body.gameid, function deleteGame(err) {
+      if (err) {
+        return next(err)
+      }
+
+      res.redirect('/shop/games')
+    })
+  })
 }
 exports.game_update_get = function(req, res, next) {
   res.send('game update GET')
