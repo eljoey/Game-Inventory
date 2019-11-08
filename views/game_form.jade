@@ -6,7 +6,7 @@ block content
     form(method='POST' action='')
         div.form-group
             label(for='title') Title:
-            input#title.form-control(type='text' placehoder='Name of Game' name='title' required='true' value=(undefined === book ? '' : game.title) )
+            input#title.form-control(type='text' placehoder='Name of Game' name='title' required='true' value=(undefined === game ? '' : game.title) )
         div.form-group
             label(for='publisher') Publisher:
             select#publisher.form-control(type='select' placeholder='Select Publisher' name='publisher' required='true')

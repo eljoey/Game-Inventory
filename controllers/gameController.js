@@ -154,7 +154,52 @@ exports.game_delete_post = function(req, res, next) {
   })
 }
 exports.game_update_get = function(req, res, next) {
-  res.send('game update GET')
+  async.parallel(
+    {
+      game: callback => {
+        Game.findById(req.params.id)
+          .populate('publisher')
+          .populate('genre')
+          .exec(callback)
+      },
+      publishers: callback => {
+        Publisher.find(callback)
+      },
+      genres: callback => {
+        Genre.find(callback)
+      }
+    },
+    (err, results) => {
+      if (err) {
+        return next(err)
+      }
+
+      if (results.game === null) {
+        let error = new Error('Game not found')
+        error.status = 404
+        return next(error)
+      }
+
+      // Mark genres as checked
+      for (let all_i = 0; all_i < results.genres.length; all_i++) {
+        for (let game_i = 0; game_i < results.game.genre.length; game_i++) {
+          if (
+            results.genres[all_i]._id.toString() ===
+            results.game.genre[game_i]._id.toString()
+          ) {
+            results.genres[all_i].checked = 'true'
+          }
+        }
+      }
+
+      res.render('game_form', {
+        title: 'Update Game',
+        game: results.game,
+        publishers: results.publishers,
+        genres: results.genres
+      })
+    }
+  )
 }
 exports.game_update_post = function(req, res, next) {
   res.send('game update POST')
