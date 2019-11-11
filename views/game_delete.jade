@@ -11,8 +11,9 @@ block content
             a(href=val.url) #{val.name}
             if index < game.genre.length - 1
              |, 
+    p #[strong Released: ] #{game.date_formatted}
     p #[strong Stock: ] #{game.stock}
-    p #[strong Price: ] $#{game.price}
+    p #[strong Price: ] #{game.price}
 
     br
     p Are you sure you want to delete this game?

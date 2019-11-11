@@ -9,9 +9,23 @@ block content
   if error
     p Error getting stats
   else
-    p The store has the following record counts:
+    p The warehouse has the following record counts:
 
     ul
       li #[strong Games: ] !{data.game_count}
       li #[strong Publishers: ] !{data.publisher_count}
       li #[strong Genres: ] !{data.genre_count}
+  h5 Links:
+  ul
+    li
+      a(href= '/shop/games') Game List 
+    li
+      a(href= '/shop/game/create') Create Game 
+    li
+      a(href= '/shop/genres') Genre List 
+    li 
+      a(href= '/shop/genre/create') Create Genre 
+    li 
+      a(href= '/shop/publishers') Publisher List 
+    li 
+      a(href= '/shop/publishers/create') Create Publisher 

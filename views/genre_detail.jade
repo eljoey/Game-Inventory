@@ -3,6 +3,8 @@ extends layout
 block content
     h1= title
 
+    p #[strong Genre: ] #{genre.name}
+
     div(style='margin: 20px 0 0 20px')
 
         h4 Games
@@ -13,7 +15,7 @@ block content
                     a(href= game.url) #{game.title}
                 
             else
-                p This genre has no games
+                p This genre has no games 
     
     hr
     p
