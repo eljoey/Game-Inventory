@@ -154,8 +154,56 @@ exports.genre_delete_post = function(req, res, next1) {
   )
 }
 exports.genre_update_get = function(req, res, next) {
-  res.send('Update Genre GET - TODO')
+  Genre.findById(req.params.id).exec((err, foundGenre) => {
+    if (err) {
+      return next(err)
+    }
+
+    if (genre === null) {
+      let err = 'Genre not found'
+      err.status = 404
+      return next(err)
+    }
+
+    res.render('genre_form', {
+      title: 'Update Genre',
+      genre: foundGenre
+    })
+  })
 }
-exports.genre_update_post = function(req, res, next) {
-  res.send('Update Genre POST - TODO')
-}
+exports.genre_update_post = [
+  body('name', 'Genre must be specified')
+    .trim()
+    .isLength({ min: 1 }),
+
+  body('name').escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req)
+
+    let genre = new Genre({
+      name: req.body.name,
+      _id: req.params.id
+    })
+
+    if (!errors.isEmpty()) {
+      res.render('genre_form', {
+        title: 'Update Genre',
+        genre: genre,
+        errors: errors.array()
+      })
+      return
+    } else {
+      Genre.findByIdAndUpdate(req.params.id, genre, {}, function(
+        err,
+        updatedGenre
+      ) {
+        if (err) {
+          return next(err)
+        }
+
+        res.redirect(updatedGenre.url)
+      })
+    }
+  }
+]
