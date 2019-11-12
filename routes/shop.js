@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const game_controller = require('../controllers/gameController.js')
-// const publisher_controller = require('../controllers/publisherController')
+const publisher_controller = require('../controllers/publisherController')
 const genre_controller = require('../controllers/genreController')
 const shop_controller = require('../controllers/shopController')
 
@@ -38,29 +38,29 @@ router.get('/games', game_controller.game_list)
 
 // /// PUBLISHER ROUTES ///
 
-// // GET, create publisher
-// router.get('/publisher/create', publisher_controller.publisher_create_get)
+// GET, create publisher
+router.get('/publisher/create', publisher_controller.publisher_create_get)
 
-// // POST, create publisher
-// router.post('/publisher/create', publisher_controller.publisher_create_post)
+// POST, create publisher
+router.post('/publisher/create', publisher_controller.publisher_create_post)
 
-// // GET, delete publisher
-// router.get('/publisher/:id/delete', publisher_controller.publisher_delete_get)
+// GET, delete publisher
+router.get('/publisher/:id/delete', publisher_controller.publisher_delete_get)
 
-// // POST, delete publisher
-// router.post('/publisher/:id/delete', publisher_controller.publisher_delete_post)
+// POST, delete publisher
+router.post('/publisher/:id/delete', publisher_controller.publisher_delete_post)
 
-// // GET, update publisher
-// router.get('/publisher/:id/update', publisher_controller.publisher_update_get)
+// GET, update publisher
+router.get('/publisher/:id/update', publisher_controller.publisher_update_get)
 
-// // POST, update publisher
-// router.post('/publisher/:id/update', publisher_controller.publisher_update_post)
+// POST, update publisher
+router.post('/publisher/:id/update', publisher_controller.publisher_update_post)
 
-// // GET, specific publisher
-// router.get('/publisher/:id', publisher_controller.publisher_detail)
+// GET, specific publisher
+router.get('/publisher/:id', publisher_controller.publisher_detail)
 
-// // GET, all publishers
-// router.get('/publishers', publisher_controller.publisher_list)
+// GET, all publishers
+router.get('/publishers', publisher_controller.publisher_list)
 
 // /// GENRE ROUTES ///
 

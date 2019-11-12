@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1= title
+
+    ul
+        each publisher in publishers
+            li
+                a(href= publisher.url) #{publisher.name}
+        
+        else 
+            p There are no publishers

@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    h1= title
+
+    p #[strong Name: ] #{publisher.name}
+
+    hr
+
+    div(style='margin: 20px 0 0 20px')
+
+        h4 Publishers Games
+
+        dl
+            each game in publisher_games
+                dt
+                    a(href= game.url) #{game.title}
+                
+            else
+                p This publisher has no games 
+    
+    hr
+    p
+        a(href= publisher.url + '/delete') Delete Publisher
+    p
+        a(href= publisher.url + '/update') Update Publisher

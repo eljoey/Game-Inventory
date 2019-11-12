@@ -3,7 +3,7 @@ const Game = require('../models/game')
 const async = require('async')
 const validator = require('express-validator')
 
-const { body, validationResult, sanitizeBody } = require('express-validator')
+const { body, validationResult } = require('express-validator')
 
 exports.genre_list = function(req, res, next) {
   Genre.find()
@@ -19,6 +19,7 @@ exports.genre_list = function(req, res, next) {
       })
     })
 }
+
 exports.genre_detail = function(req, res, next) {
   async.parallel(
     {
@@ -48,11 +49,13 @@ exports.genre_detail = function(req, res, next) {
     }
   )
 }
+
 exports.genre_create_get = function(req, res) {
   res.render('genre_form', {
     title: 'Create Genre'
   })
 }
+
 exports.genre_create_post = [
   validator
     .body('name', 'Name must not be empty')
@@ -93,6 +96,7 @@ exports.genre_create_post = [
     }
   }
 ]
+
 exports.genre_delete_get = function(req, res, next) {
   async.parallel(
     {
@@ -120,6 +124,7 @@ exports.genre_delete_get = function(req, res, next) {
     }
   )
 }
+
 exports.genre_delete_post = function(req, res, next1) {
   async.parallel(
     {
@@ -153,6 +158,7 @@ exports.genre_delete_post = function(req, res, next1) {
     }
   )
 }
+
 exports.genre_update_get = function(req, res, next) {
   Genre.findById(req.params.id).exec((err, foundGenre) => {
     if (err) {
@@ -171,6 +177,7 @@ exports.genre_update_get = function(req, res, next) {
     })
   })
 }
+
 exports.genre_update_post = [
   body('name', 'Genre must be specified')
     .trim()
