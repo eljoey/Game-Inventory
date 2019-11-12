@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1= title
+
+    form(action="", method="post")
+        div.form-group
+            label(for='name') Name:
+            input(type='text' name='name' id='name' value=(undefined === publisher ? '' : publisher.name) required = true)
+        button.btn.btn-primary(type="submit") Submit
+
+    if errors
+        ul
+            for error in errors
+                li!= error.msg

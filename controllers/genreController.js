@@ -129,10 +129,10 @@ exports.genre_delete_post = function(req, res, next1) {
   async.parallel(
     {
       genre: callback => {
-        Genre.findById(req.body.id).exec(callback)
+        Genre.findById(req.body.genreid).exec(callback)
       },
       genre_games: callback => {
-        Game.find({ genre: req.body.id }).exec(callback)
+        Game.find({ genre: req.body.genreid }).exec(callback)
       }
     },
     (err, results) => {
@@ -165,7 +165,7 @@ exports.genre_update_get = function(req, res, next) {
       return next(err)
     }
 
-    if (genre === null) {
+    if (foundGenre === null) {
       let err = 'Genre not found'
       err.status = 404
       return next(err)
