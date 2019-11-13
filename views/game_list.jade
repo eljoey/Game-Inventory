@@ -15,7 +15,7 @@ block content
             each genre in game.genre
                 a(href=genre.url) #{genre.name}
                 | 
-        p #[strong Price: ] #{game.price}
+        p #[strong Price: ] $#{game.price}
         br
 
     else

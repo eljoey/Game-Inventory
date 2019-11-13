@@ -2,20 +2,55 @@ doctype html
 html
   head
     title= title
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
   body
-    header
-      a(href='/shop') Home 
-      | | 
-      a(href='/shop/games') Games 
-      | | 
-      a(href='/shop/genres') Genres 
-      | | 
-      a(href='/shop/publishers') Publishers 
-      | | 
+      
+
+      nav.navbar.navbar-default(role='navigation')
+        div.navbar-header
+          button(type='button',data-toggle='collapse',data-target='#jcs-navbar-collapse-1').navbar-toggle
+            span.sr-only Toggle navigation
+            span.iconbar
+            span.iconbar
+            span.iconbar
+          div.navbar-brand Game Inventory
+        div#jcs-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+
+            li
+              a(href='/shop') Home
+
+            li.dropdown
+              a(href='#',data-toggle='dropdown').dropdown-toggle Games
+                b.caret
+              ul.dropdown-menu
+                li: a(href='/shop/games') List of Games
+                li: a(href='/shop/game/create') Create New Game
+
+            li.dropdown
+              a(href='#',data-toggle='dropdown').dropdown-toggle Publishers
+                b.caret
+              ul.dropdown-menu
+                li: a(href='/shop/publishers') List of Publishers
+                li: a(href='/shop/publisher/create') Create New Publisher
+            
+            li.dropdown
+              a(href='#',data-toggle='dropdown').dropdown-toggle Genres
+                b.caret
+              ul.dropdown-menu
+                li: a(href='/shop/genres') List of Genres
+                li: a(href='/shop/genre/create') Create New Genre
+          
+
+    script
+      $('.dropdown-toggle').dropdown()
+
+
+
+      
     block content
