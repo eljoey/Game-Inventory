@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const GenreSchema = new Schema({
   name: {
@@ -9,12 +9,12 @@ const GenreSchema = new Schema({
     min: 3,
     max: 100
   }
-})
+});
 
 // URL virtual
-GenreSchema.virtual('url').get(function() {
-  return '/shop/genre/' + this._id
-})
+GenreSchema.virtual("url").get(function() {
+  return "/inventory/genre/" + this._id;
+});
 
 // Export model
-module.exports = mongoose.model('Genre', GenreSchema)
+module.exports = mongoose.model("Genre", GenreSchema);

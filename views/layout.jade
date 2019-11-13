@@ -23,32 +23,31 @@ html
           ul.nav.navbar-nav
 
             li
-              a(href='/shop') Home
+              a(href='/') Home
 
             li.dropdown
               a(href='#',data-toggle='dropdown').dropdown-toggle Games
                 b.caret
               ul.dropdown-menu
-                li: a(href='/shop/games') List of Games
-                li: a(href='/shop/game/create') Create New Game
+                li: a(href='/inventory/games') List of Games
+                li: a(href='/inventory/game/create') Create New Game
 
             li.dropdown
               a(href='#',data-toggle='dropdown').dropdown-toggle Publishers
                 b.caret
               ul.dropdown-menu
-                li: a(href='/shop/publishers') List of Publishers
-                li: a(href='/shop/publisher/create') Create New Publisher
+                li: a(href='/inventory/publishers') List of Publishers
+                li: a(href='/inventory/publisher/create') Create New Publisher
             
             li.dropdown
               a(href='#',data-toggle='dropdown').dropdown-toggle Genres
                 b.caret
               ul.dropdown-menu
-                li: a(href='/shop/genres') List of Genres
-                li: a(href='/shop/genre/create') Create New Genre
+                li: a(href='/inventory/genres') List of Genres
+                li: a(href='/inventory/genre/create') Create New Genre
           
 
-    script
-      $('.dropdown-toggle').dropdown()
+    
 
 
 
