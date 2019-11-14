@@ -3,17 +3,25 @@ extends layout
 block content
     h1= title
 
-    p #[strong Title: ] #{game_info.title}
-    p #[strong Publisher: ]
-        a(href = game_info.publisher.url) #{game_info.publisher.name}
-    p #[strong Genres: ]
-        each genre, index in game_info.genre
-            a(href = genre.url) #{genre.name}
-            if index < game_info.genre.length - 1
-                |, 
-    p #[strong Released: ] #{game_info.date_formatted}
-    p #[strong Stock: ] #{game_info.stock}
-    p #[strong Price: ] $#{game_info.price}
+    div.game-container
+        div.game-image
+            if game_info.image
+                img(src=game_info.image_file, alt="Image of " + game_info.title, height='200px', width='200px')
+            else 
+                img(src='/images/defaultImage.jpg', alt="There is no image of " + game_info.title, height='200px', width='200px')
+
+        div.game.info
+            p #[strong Title: ] #{game_info.title}
+            p #[strong Publisher: ]
+                a(href = game_info.publisher.url) #{game_info.publisher.name}
+            p #[strong Genres: ]
+                each genre, index in game_info.genre
+                    a(href = genre.url) #{genre.name}
+                    if index < game_info.genre.length - 1
+                        |, 
+            p #[strong Released: ] #{game_info.date_formatted}
+            p #[strong Stock: ] #{game_info.stock}
+            p #[strong Price: ] $#{game_info.price}
 
     hr
     p

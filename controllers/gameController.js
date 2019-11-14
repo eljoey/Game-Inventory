@@ -252,6 +252,7 @@ exports.game_update_post = [
       released: req.body.released,
       stock: req.body.stock,
       price: req.body.price,
+      image: req.file ? req.file.filename : req.body.currentImage,
       _id: req.params.id
     })
 

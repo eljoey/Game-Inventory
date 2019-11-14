@@ -37,9 +37,20 @@ block content
         div.form-group
             label(for='price') Price:
             input#price.form-control(type='number' placeholder='Price' name='price' value=(undefined === game ? '' : game.price))
-        div.form-group
-            label(for='image') Image: 
-            input#image(type="file", name="image")
+        
+        //- If there is a game and the game has an image, else ...
+        if (!(undefined === game) && game.image)
+            p #[strong Current Image: ] 
+            img.current-image(src=game.image_file, alt=("Image of " + game.title), width='100px', height='100px' )
+            div.form-group
+                input#current-image.form-control(type='hidden' name='currentImage' value=game.image)
+            div.form-group
+                label(for='image') Change Current Image:
+                input#image(type="file", name="image")
+        else    
+            div.form-group
+                label(for='image') Image:
+                input#image(type="file", name="image")
         button.btn.btn-primary(type='submit') Submit
 
     if errors
