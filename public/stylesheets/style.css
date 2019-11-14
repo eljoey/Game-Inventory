@@ -1,6 +1,6 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -9,4 +9,21 @@ a {
 
 .navbar-brand {
   cursor: default;
+}
+
+.game-container {
+  display: flex;
+  border: 1px solid gray;
+  margin: 5px;
+  padding: 5px;
+}
+
+.game-image {
+  margin-right: 20px;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

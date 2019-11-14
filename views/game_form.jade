@@ -3,7 +3,7 @@ extends layout
 block content
     h1= title
 
-    form(method='POST' action='')
+    form(method='POST' action='' enctype='multipart/form-data')
         div.form-group
             label(for='title') Title:
             input#title.form-control(type='text' placehoder='Name of Game' name='title' required='true' value=(undefined === game ? '' : game.title) )
@@ -37,6 +37,9 @@ block content
         div.form-group
             label(for='price') Price:
             input#price.form-control(type='number' placeholder='Price' name='price' value=(undefined === game ? '' : game.price))
+        div.form-group
+            label(for='image') Image: 
+            input#image(type="file", name="image")
         button.btn.btn-primary(type='submit') Submit
 
     if errors

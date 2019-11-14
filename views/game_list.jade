@@ -7,16 +7,23 @@ block content
 
     - game_list.sort((a, b) => {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0})
     each game in game_list
-        p #[strong Title: ] 
-            a(href=game.url) #{game.title}
-        p #[strong Publisher: ] 
-            a(href=game.publisher.url) #{game.publisher.name}
-        p #[strong Genre: ] 
-            each genre in game.genre
-                a(href=genre.url) #{genre.name}
-                | 
-        p #[strong Price: ] $#{game.price}
-        br
+        div.game-container
+            div.game-image
+                if game.image!= null
+                    img#game-image(src=game.image_file, alt=('Picture of ' + game.title), width='100px' height='100px')
+                else 
+                    img#game-image(src='/images/defaultImage.jpg', alt=('There is no Picture of ' + game.title), width='100px' height='100px')
+            div.game-info
+                p #[strong Title: ] 
+                    a(href=game.url) #{game.title}
+                p #[strong Publisher: ] 
+                    a(href=game.publisher.url) #{game.publisher.name}
+                p #[strong Genre: ] 
+                    each genre in game.genre
+                        a(href=genre.url) #{genre.name}
+                        | 
+                p #[strong Price: ] $#{game.price}
+                br
 
     else
         p There are no games.
