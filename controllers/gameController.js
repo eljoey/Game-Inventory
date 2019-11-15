@@ -2,7 +2,7 @@ const Game = require('../models/game')
 const Publisher = require('../models/publisher')
 const Genre = require('../models/genre')
 
-const path = require('path')
+const fs = require('fs')
 
 const async = require('async')
 const { body, validationResult, sanitizeBody } = require('express-validator')
@@ -147,6 +147,16 @@ exports.game_delete_post = function(req, res, next) {
   Game.findById(req.body.gameid).exec((err, gameToDelete) => {
     if (err) {
       return next(err)
+    }
+
+    // If there is an image, delete image as well.
+    if (gameToDelete.image != null) {
+      fs.unlink('./public' + gameToDelete.image_file, err => {
+        if (err) {
+          next(err)
+        }
+        console.log('./public' + gameToDelete.image_file + ' was deleted')
+      })
     }
 
     Game.findByIdAndRemove(req.body.gameid, function deleteGame(err) {
