@@ -153,7 +153,7 @@ exports.game_delete_post = function(req, res, next) {
     if (gameToDelete.image != null) {
       fs.unlink('./public' + gameToDelete.image_file, err => {
         if (err) {
-          next(err)
+          return next(err)
         }
         console.log('./public' + gameToDelete.image_file + ' was deleted')
       })

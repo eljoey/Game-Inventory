@@ -36,7 +36,7 @@ block content
             input#stock.form-control(type='number' placeholder='Number of stock' name='stock' value=(undefined === game ? '' : game.stock))
         div.form-group
             label(for='price') Price:
-            input#price.form-control(type='number' placeholder='Price' name='price' value=(undefined === game ? '' : game.price))
+            input#price.form-control(type='number' placeholder='Price' step='any' name='price' value=(undefined === game ? '' : game.price))
         
         //- If there is a game and the game has an image, else ...
         if (!(undefined === game) && game.image)
