@@ -67,8 +67,6 @@ exports.game_create_post = [
 
   (req, res, next) => {
     const errors = validationResult(req)
-    console.log(errors)
-    console.log(req.file)
 
     //enter date as utc
     const dateToFormat = req.body.released
